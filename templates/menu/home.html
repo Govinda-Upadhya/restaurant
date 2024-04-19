@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        button {
+            font-size: 18px;
+            margin: 5px;
+        }
+
+        input {
+            width: 50px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Menu</h2>
+
+    <form action="/order" method="POST" id="valueForm">
+        
+        
+        {% csrf_token %}
+        {% for food in foods %}
+        <label for="valueInput1">{{food.name}}:</label>
+        <br>
+        <img src="{{food.image.url}}" width="300" height="200">
+        <br>
+        <label>Price:</label><span class="item-price">{{food.price}}</span>
+        <br>
+        <button type="button" onclick="decrement('{{food.name}}')">-</button>
+        
+        <input type="number" id="{{food.name}}" min="0" value="0" name="num1" readonly>
+        <input type="hidden" name="food_name" value="{{ food.name }}">
+        
+        
+        
+        <button type="button" onclick="increment('{{food.name}}')">+</button>
+        <br>
+        {% endfor %}
+        <label>Table number:</label><input type="text" id="table_no" name="tableno">
+        <label>Phone number:</label><input type="text" id="phone-_no" name="phoneno">
+        <br>
+        <input type="submit" value="submit" style="width: 100px;">
+       
+    </form>
+
+    <script>
+        function increment(inputId) {
+            const valueInput = document.getElementById(inputId);
+            valueInput.value = parseInt(valueInput.value) + 1;
+        }
+
+        function decrement(inputId) {
+            const valueInput = document.getElementById(inputId);
+            if (parseInt(valueInput.value) > 0) {
+                valueInput.value = parseInt(valueInput.value) - 1;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .grand-total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Order Details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Food Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Replace the following rows with dynamic data from your Django views -->
+            {% for order in grandorders.orders.all %}
+                
+                <tr>
+                    <td>{{order.fooditem.name}}</td>
+                    <td>{{order.fooditem.price}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.total_price}}</td>
+                </tr>
+                
+                
+            {% endfor %}
+           
+        </tbody>
+        
+    </table>
+
+
+    <p class="grand-total">Grand Total: {{grandorders.grand_total}}</p>
+    <p class="grand-total"> Orderid {{grandorders}}</p>
+
+</body>
+</html>
